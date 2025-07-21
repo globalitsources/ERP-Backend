@@ -19,8 +19,6 @@ app.use(
   })
 );
 
-// Optional but safe to include for preflight
-app.options("*", cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use("/api/v2/user", userRoutes);
