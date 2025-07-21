@@ -11,17 +11,25 @@ dotenv.config();
 connectDB();
 
 const app = express();
-app.use(
- cors({
-  origin: [
-    "https://erp-gits-baea7f60.vercel.app", 
-   "*",
-  ],
-  methods: ["GET", "POST", "PUT", "DELETE"],
-  credentials: true
-})
+const allowedOrigins = [
+  "https://erp-gits-baea7f60.vercel.app",
+  "http://localhost:3000"
+];
 
+app.use(
+  cors({
+    origin: (origin, callback) => {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: true,
+  })
 );
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use("/api/v2/user", userRoutes);
