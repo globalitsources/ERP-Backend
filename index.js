@@ -14,8 +14,7 @@ const app = express();
 app.use(
   cors({
     origin: [
-      "http://localhost:5173",
-      "https://erp-gits-baea7f60.vercel.app/"
+     "https://erp-gits-baea7f60.vercel.app/"
 
     ],
     methods: ["GET", "POST", "PUT", "DELETE"],
